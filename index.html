@@ -2,7 +2,7 @@
 <html lang="az">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>Ad günün mübarək</title>
   <style>
     :root {
@@ -29,6 +29,7 @@
     html,
     body {
       overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
@@ -90,6 +91,7 @@
       inset: 0;
       z-index: 4;
       pointer-events: none;
+      touch-action: none;
     }
 
     .firework-message {
@@ -109,6 +111,7 @@
         0 18px 46px rgba(34, 24, 36, .24),
         inset 0 1px 0 rgba(255, 255, 255, .36);
       backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       font-family: Georgia, "Times New Roman", serif;
       font-size: clamp(24px, 4.4vw, 48px);
       font-weight: 900;
@@ -233,6 +236,7 @@
       background: rgba(255, 255, 255, .78);
       box-shadow: 0 12px 28px rgba(47, 27, 52, .08);
       backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
 
     input {
@@ -258,6 +262,8 @@
       box-shadow: 0 14px 30px rgba(34, 24, 36, .24);
       cursor: pointer;
       transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
     }
 
     button:hover {
@@ -331,6 +337,7 @@
       transform: rotateX(var(--rx)) rotateY(var(--ry));
       transform-style: preserve-3d;
       transition: transform .24s ease;
+      touch-action: none;
     }
 
     .halo {
@@ -342,6 +349,7 @@
         linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .32));
       box-shadow: var(--shadow);
       backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       overflow: hidden;
       transform: translateZ(-18px);
     }
@@ -747,6 +755,7 @@
       background: rgba(255, 255, 255, .7);
       box-shadow: 0 16px 38px rgba(47, 27, 52, .13);
       backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       text-align: center;
       font-size: 17px;
       font-weight: 800;
@@ -772,6 +781,7 @@
       background: rgba(255, 255, 255, .56);
       box-shadow: 0 10px 24px rgba(47, 27, 52, .1);
       backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       font-size: 13px;
       font-weight: 900;
       transform: translateZ(124px);
@@ -1015,6 +1025,7 @@
       animation: none;
     }
 
+    /* Mobil optimallaşdırmalar */
     @media (max-width: 850px) {
       .page {
         overflow: hidden;
@@ -1044,6 +1055,29 @@
         width: min(390px, 94vw);
       }
 
+      .halo {
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+      }
+
+      .cake {
+        transform: translateZ(74px) scale(.7);
+        transition: opacity .9s ease .72s, transform 1.35s cubic-bezier(.19, 1, .22, 1) .48s;
+      }
+
+      body.gift-open .cake {
+        transform: translateZ(74px) translateY(-12px) scale(.7);
+      }
+
+      .gift-box {
+        transform: translateX(-50%) translateZ(60px) scale(.7);
+        transition: transform 1.45s cubic-bezier(.19, 1, .22, 1), opacity .7s ease 1.05s;
+      }
+
+      body.gift-open .gift-box {
+        transform: translateX(-50%) translateY(34px) translateZ(60px) scale(.68);
+      }
+
       .b1 {
         left: 2%;
       }
@@ -1054,6 +1088,14 @@
 
       .wish {
         top: 79%;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+
+      .firework-message {
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        font-size: clamp(18px, 3.4vw, 32px);
       }
     }
 
@@ -1072,11 +1114,37 @@
       }
 
       .cake {
-        transform: translateZ(74px) scale(.84);
+        transform: translateZ(74px) scale(.6);
+      }
+
+      body.gift-open .cake {
+        transform: translateZ(74px) translateY(-12px) scale(.6);
+      }
+
+      .gift-box {
+        transform: translateX(-50%) translateZ(40px) scale(.55);
+      }
+
+      body.gift-open .gift-box {
+        transform: translateX(-50%) translateY(34px) translateZ(40px) scale(.53);
       }
 
       .stage {
-        min-height: 440px;
+        min-height: 380px;
+      }
+
+      .card {
+        width: min(340px, 96vw);
+      }
+
+      .halo {
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
+      }
+
+      .firework-message {
+        font-size: clamp(14px, 2.8vw, 24px);
+        padding: clamp(6px, 1.2vw, 10px) clamp(10px, 2vw, 16px);
       }
     }
 
@@ -1164,6 +1232,10 @@
   </main>
 
   <script>
+    // Mobil cihazları tanımaq
+    const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     const canvas = document.getElementById("confetti");
     const ctx = canvas.getContext("2d");
     const root = document.documentElement;
@@ -1176,19 +1248,21 @@
     const openGiftButton = document.getElementById("openGiftButton");
     const candlesButton = document.getElementById("candlesButton");
     const colors = ["#f46d8f", "#ff8a5b", "#ffd166", "#56c7a4", "#5b8def", "#8e70d6"];
-    const celebrationText = "Arzuların ulduz kimi parlasın, qəlbin həmişə sevinc dolu olsun. 🌟";
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const celebrationText = "Arzuların ulduz kimi parlasın!";
     let particles = [];
     let width = 0;
     let height = 0;
     let lastTime = performance.now();
+    let frameCount = 0;
+    let isDrawing = false;
 
     if ("scrollRestoration" in history) {
       history.scrollRestoration = "manual";
     }
 
+    // Performans üçün canvas ölçüsünü tənzimlə
     function resize() {
-      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      const ratio = Math.min(window.devicePixelRatio || 1, isMobile ? 1.2 : 2);
       width = window.innerWidth;
       height = window.innerHeight;
       canvas.width = width * ratio;
@@ -1207,31 +1281,29 @@
         y: options.y ?? (burst ? height * (.18 + Math.random() * .2) : -20 - Math.random() * height),
         size,
         color: colors[Math.floor(Math.random() * colors.length)],
-        velocityX: (Math.random() - .5) * (burst ? 8 : 2.4),
-        velocityY: burst ? Math.random() * 5 + 2 : Math.random() * 2.5 + 1.2,
+        velocityX: (Math.random() - .5) * (burst ? (isMobile ? 5 : 8) : 2.4),
+        velocityY: burst ? Math.random() * 3 + 1.5 : Math.random() * 2.5 + 1.2,
         rotation: Math.random() * Math.PI,
         spin: (Math.random() - .5) * .25,
         life: burst ? 1 : .75 + Math.random() * .6
       };
     }
 
-    function burst(count = 130) {
-      for (let index = 0; index < count; index += 1) {
+    function burst(count = isMobile ? 60 : 130) {
+      const actualCount = reducedMotion ? Math.floor(count * 0.3) : count;
+      for (let index = 0; index < actualCount; index += 1) {
         particles.push(makeConfetti({ burst: true }));
       }
     }
 
-    function firework(x = width * .72, y = height * .26, count = 90) {
-      explodeFirework(x, y, colors[Math.floor(Math.random() * colors.length)], count);
-    }
-
-    function explodeFirework(x, y, baseColor = "#ffd166", count = 96) {
+    function explodeFirework(x, y, baseColor = "#ffd166", count = isMobile ? 50 : 96) {
       document.body.classList.remove("firework-flash");
       void document.body.offsetWidth;
       document.body.classList.add("firework-flash");
 
-      const ringCount = count > 70 ? 2 : 1;
-      const emberCount = count > 70 ? 24 : 8;
+      const actualCount = reducedMotion ? Math.floor(count * 0.4) : count;
+      const ringCount = actualCount > 70 ? 2 : 1;
+      const emberCount = actualCount > 70 ? 18 : 6;
 
       for (let index = 0; index < ringCount; index += 1) {
         particles.push({
@@ -1250,9 +1322,9 @@
         });
       }
 
-      for (let index = 0; index < count; index += 1) {
-        const angle = (Math.PI * 2 * index) / count + Math.random() * .08;
-        const ring = index / count;
+      for (let index = 0; index < actualCount; index += 1) {
+        const angle = (Math.PI * 2 * index) / actualCount + Math.random() * .08;
+        const ring = index / actualCount;
         const speed = 3.2 + Math.random() * 6.6 + Math.sin(ring * Math.PI) * 2.2;
         particles.push({
           type: "spark",
@@ -1289,7 +1361,8 @@
     }
 
     function textSparkle(x, y, color) {
-      for (let index = 0; index < 10; index += 1) {
+      const count = reducedMotion ? 4 : 10;
+      for (let index = 0; index < count; index += 1) {
         const angle = Math.random() * Math.PI * 2;
         const speed = .7 + Math.random() * 1.8;
         particles.push({
@@ -1329,7 +1402,11 @@
 
     function candleFireworks() {
       const palette = ["#ffd166", "#ff8a5b", "#f46d8f", "#5b8def", "#56c7a4"];
-      const targets = [
+      const targets = isMobile ? [
+        [width * .42, height * .28],
+        [width * .58, height * .22],
+        [width * .48, height * .38]
+      ] : [
         [width * .38, height * .22],
         [width * .54, height * .15],
         [width * .72, height * .24],
@@ -1340,14 +1417,30 @@
       targets.forEach(([targetX, targetY], index) => {
         window.setTimeout(() => {
           launchFirework(width * (.28 + Math.random() * .44), targetX, targetY, palette[index % palette.length]);
-        }, index * 230);
+        }, index * (isMobile ? 350 : 230));
       });
     }
 
     function draw(now) {
+      if (isDrawing) return;
+      isDrawing = true;
+
+      frameCount++;
+      if (isMobile && frameCount % 2 === 0) {
+        isDrawing = false;
+        requestAnimationFrame(draw);
+        return;
+      }
+
       const delta = Math.min((now - lastTime) / 16.67, 2);
       lastTime = now;
       ctx.clearRect(0, 0, width, height);
+
+      // Maksimum hissəcik sayını məhdudlaşdır
+      const maxParticles = isMobile ? 300 : 600;
+      if (particles.length > maxParticles) {
+        particles.splice(0, particles.length - maxParticles);
+      }
 
       particles = particles.filter((piece) => {
         piece.previousX = piece.x;
@@ -1395,7 +1488,7 @@
           ctx.restore();
 
           if (piece.y <= piece.targetY) {
-            explodeFirework(piece.x, piece.y, piece.color, 58);
+            explodeFirework(piece.x, piece.y, piece.color, isMobile ? 40 : 58);
             return false;
           }
 
@@ -1444,6 +1537,7 @@
         return piece.y < height + 30 && piece.life > 0;
       });
 
+      isDrawing = false;
       requestAnimationFrame(draw);
     }
 
@@ -1453,8 +1547,8 @@
       window.setTimeout(() => {
         candlesButton.hidden = false;
         candlesButton.focus();
-      }, 1250);
-      window.setTimeout(() => burst(24), 620);
+      }, isMobile ? 1800 : 1250);
+      window.setTimeout(() => burst(isMobile ? 16 : 24), isMobile ? 800 : 620);
       wish.textContent = "Röya, arzunu tut və şamları üfür.";
     }
 
@@ -1472,20 +1566,21 @@
 
       fireworkMessage.classList.add("show");
 
+      const delay = isMobile ? 200 : 145;
       letters.forEach(({ span, letter }, index) => {
         window.setTimeout(() => {
           span.classList.add("visible");
 
-          if (letter !== " ") {
+          if (letter !== " " && !reducedMotion) {
             const box = span.getBoundingClientRect();
             textSparkle(box.left + box.width / 2, box.top + box.height * .45, colors[index % colors.length]);
           }
-        }, index * 145);
+        }, index * delay);
       });
 
       window.setTimeout(() => {
         fireworkMessage.classList.remove("show");
-      }, letters.length * 145 + 2600);
+      }, letters.length * delay + 2600);
     }
 
     function blowCandles() {
@@ -1494,39 +1589,83 @@
         window.setTimeout(() => candle.classList.add("blown"), index * 120);
       });
       wish.textContent = "Arzun ürəyində işıq kimi qalsın.";
-      window.setTimeout(candleFireworks, 720);
-      window.setTimeout(writeFireworkMessage, 1250);
+      window.setTimeout(candleFireworks, isMobile ? 1000 : 720);
+      window.setTimeout(writeFireworkMessage, isMobile ? 1600 : 1250);
       window.setTimeout(() => {
         candles.forEach((candle) => candle.classList.remove("blown"));
         wish.textContent = "Qoy hər yeni səhər üzünə gülüş gətirsin.";
         candlesButton.disabled = false;
-      }, 4600);
+      }, isMobile ? 5500 : 4600);
     }
 
-    function tiltScene(event) {
-      const x = event.clientX / Math.max(width, 1);
-      const y = event.clientY / Math.max(height, 1);
-      root.style.setProperty("--mx", `${Math.round(x * 100)}%`);
-      root.style.setProperty("--my", `${Math.round(y * 100)}%`);
+    // Touch hadisələri üçün optimallaşdırma
+    let touchTimeout;
+    let moveTimeout;
+
+    function handlePointerMove(event) {
+      if (isMobile) {
+        if (moveTimeout) return;
+        moveTimeout = setTimeout(() => {
+          moveTimeout = null;
+        }, 50);
+      }
+
+      const clientX = event.clientX || (event.touches && event.touches[0]?.clientX) || width / 2;
+      const clientY = event.clientY || (event.touches && event.touches[0]?.clientY) || height / 2;
+
+      root.style.setProperty("--mx", `${Math.round((clientX / Math.max(width, 1)) * 100)}%`);
+      root.style.setProperty("--my", `${Math.round((clientY / Math.max(height, 1)) * 100)}%`);
 
       if (!card || width < 860 || reducedMotion) {
         return;
       }
 
       const bounds = card.getBoundingClientRect();
-      const relativeX = (event.clientX - bounds.left) / bounds.width - .5;
-      const relativeY = (event.clientY - bounds.top) / bounds.height - .5;
+      const relativeX = (clientX - bounds.left) / bounds.width - .5;
+      const relativeY = (clientY - bounds.top) / bounds.height - .5;
       root.style.setProperty("--ry", `${(relativeX * 7).toFixed(2)}deg`);
       root.style.setProperty("--rx", `${(-relativeY * 7).toFixed(2)}deg`);
     }
 
+    // Touch hadisələri
+    if (isMobile) {
+      document.addEventListener('touchstart', function(e) {
+        const touch = e.touches[0];
+        if (touch) {
+          handlePointerMove({ clientX: touch.clientX, clientY: touch.clientY });
+        }
+      }, { passive: true });
+
+      document.addEventListener('touchmove', function(e) {
+        const touch = e.touches[0];
+        if (touch) {
+          handlePointerMove({ clientX: touch.clientX, clientY: touch.clientY });
+        }
+      }, { passive: true });
+    }
+
     window.addEventListener("resize", resize);
-    window.addEventListener("pointermove", (event) => {
-      root.style.setProperty("--mx", `${Math.round((event.clientX / Math.max(width, 1)) * 100)}%`);
-      root.style.setProperty("--my", `${Math.round((event.clientY / Math.max(height, 1)) * 100)}%`);
-    });
+    window.addEventListener("pointermove", handlePointerMove);
+
+    // Button hadisələri
     openGiftButton.addEventListener("click", openGift);
+    openGiftButton.addEventListener("touchstart", function(e) {
+      // Touch cihazlarda click-dən əvvəl işləsin
+      if (isMobile) {
+        e.preventDefault();
+        openGift();
+      }
+    }, { passive: false });
+
     candlesButton.addEventListener("click", blowCandles);
+    candlesButton.addEventListener("touchstart", function(e) {
+      if (isMobile) {
+        e.preventDefault();
+        if (!candlesButton.disabled) {
+          blowCandles();
+        }
+      }
+    }, { passive: false });
 
     resize();
     requestAnimationFrame(draw);
