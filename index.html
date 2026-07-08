@@ -877,25 +877,31 @@
     }
 
     .friend-arm.left {
-      z-index: 1;
-      left: 14px;
-      transform: rotate(28deg);
+      z-index: 6;
+      left: 0;
+      transform: rotate(160deg);
+      bottom: 48px;
+      height: 52px;
     }
 
     .friend-arm.right {
-      z-index: 6;
-      right: 6px;
-      bottom: 52px;
-      height: 56px;
-      transform: rotate(84deg);
+      z-index: 1;
+      right: 0;
+      bottom: 48px;
+      height: 52px;
+      transform: rotate(20deg);
     }
 
     body.surprise-show .cake-friend {
       animation: friendRise 1.05s cubic-bezier(.16, 1, .3, 1) .18s both, friendBounce 2.2s ease-in-out 1.28s infinite;
     }
 
+    body.surprise-show .friend-arm.left {
+      animation: waveLeft 1.05s ease-in-out .98s infinite;
+    }
+
     body.surprise-show .friend-arm.right {
-      animation: waveHand 1.05s ease-in-out .98s infinite;
+      animation: waveRight 1.05s ease-in-out .98s infinite;
     }
 
     .cake-burst {
@@ -1404,21 +1410,39 @@
       }
     }
 
-    @keyframes waveHand {
+    @keyframes waveLeft {
       0%, 100% {
-        transform: rotate(88deg);
+        transform: rotate(160deg);
       }
       22% {
-        transform: rotate(116deg);
+        transform: rotate(130deg);
       }
       44% {
-        transform: rotate(92deg);
+        transform: rotate(148deg);
       }
       66% {
-        transform: rotate(112deg);
+        transform: rotate(135deg);
       }
       82% {
-        transform: rotate(96deg);
+        transform: rotate(145deg);
+      }
+    }
+
+    @keyframes waveRight {
+      0%, 100% {
+        transform: rotate(20deg);
+      }
+      22% {
+        transform: rotate(50deg);
+      }
+      44% {
+        transform: rotate(32deg);
+      }
+      66% {
+        transform: rotate(45deg);
+      }
+      82% {
+        transform: rotate(36deg);
       }
     }
 
