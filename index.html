@@ -576,10 +576,10 @@
     .cake-friend {
       position: absolute;
       left: 50%;
-      bottom: 150px;
+      bottom: 140px;
       z-index: 4;
-      width: 112px;
-      height: 148px;
+      width: 100px;
+      height: 150px;
       opacity: 0;
       pointer-events: none;
       transform: translateX(-50%) translateY(80px) scale(.82);
@@ -589,15 +589,15 @@
     .friend-hair {
       position: absolute;
       left: 50%;
-      bottom: 27px;
+      bottom: 22px;
       z-index: 4;
-      width: 76px;
-      height: 114px;
-      border-radius: 38px 40px 42px 26px;
+      width: 82px;
+      height: 118px;
+      border-radius: 40px 40px 42px 28px;
       background:
         radial-gradient(circle at 72% 18%, rgba(255, 255, 255, .16) 0 8px, transparent 9px),
         linear-gradient(105deg, transparent 0 22%, rgba(255, 255, 255, .13) 23% 28%, transparent 29%),
-        linear-gradient(135deg, #1d131b, #533243 60%, #171118);
+        linear-gradient(135deg, #1d131b, #5a2c3e 60%, #171118);
       box-shadow:
         18px 14px 0 rgba(30, 19, 28, .2),
         inset -10px 0 0 rgba(26, 18, 26, .18);
@@ -621,10 +621,10 @@
       left: 50%;
       bottom: 0;
       z-index: 3;
-      width: 66px;
-      height: 66px;
+      width: 64px;
+      height: 68px;
       border-radius: 24px 24px 18px 18px;
-      background: #fff8f2;
+      background: linear-gradient(180deg, #fff8f2, #f5ebe4);
       box-shadow:
         inset 0 -9px 0 rgba(34, 24, 36, .05),
         0 8px 15px rgba(47, 27, 52, .1);
@@ -635,14 +635,14 @@
     .friend-body::before {
       content: "";
       position: absolute;
-      left: 5px;
-      right: 5px;
+      left: 6px;
+      right: 6px;
       bottom: -2px;
       height: 56px;
       border-radius: 18px 18px 14px 14px;
       background:
-        linear-gradient(135deg, transparent 0 43%, #111 44% 56%, transparent 57%),
-        repeating-linear-gradient(45deg, #111 0 5px, #fff 5px 10px);
+        linear-gradient(135deg, transparent 0 43%, #2a1a24 44% 56%, transparent 57%),
+        repeating-linear-gradient(45deg, #2a1a24 0 5px, #f5ebe4 5px 10px);
       clip-path: polygon(2% 0, 35% 0, 50% 24%, 65% 0, 98% 0, 90% 100%, 10% 100%);
     }
 
@@ -651,101 +651,194 @@
       position: absolute;
       left: 50%;
       top: -2px;
-      width: 38px;
-      height: 26px;
+      width: 36px;
+      height: 28px;
       border-radius: 0 0 18px 18px;
       background:
-        linear-gradient(90deg, #111 0 8px, transparent 8px 30px, #111 30px),
-        linear-gradient(#fff 0 100%);
+        linear-gradient(90deg, #2a1a24 0 8px, transparent 8px 28px, #2a1a24 28px),
+        linear-gradient(#f5ebe4 0 100%);
       transform: translateX(-50%);
     }
 
     .friend-head {
       position: absolute;
       left: 50%;
-      bottom: 56px;
+      bottom: 58px;
       z-index: 5;
-      width: 66px;
-      height: 66px;
-      border-radius: 48% 48% 50% 50%;
-      background: #ffd6bd;
+      width: 72px;
+      height: 72px;
+      border-radius: 50% 50% 48% 48%;
+      background: linear-gradient(160deg, #ffdac6, #f5c4ad);
       box-shadow:
         inset 0 -7px 0 rgba(244, 109, 143, .12),
         0 6px 14px rgba(47, 27, 52, .12);
       transform: translateX(-50%);
+      overflow: visible;
     }
 
     .friend-head::before {
       content: "";
       position: absolute;
-      left: -7px;
+      left: -8px;
       right: -8px;
-      top: -9px;
-      height: 36px;
-      border-radius: 32px 34px 20px 14px;
+      top: -10px;
+      height: 38px;
+      border-radius: 34px 34px 20px 14px;
       background:
         radial-gradient(circle at 74% 18%, rgba(255, 255, 255, .14) 0 9px, transparent 10px),
-        linear-gradient(135deg, #1c121a, #523142 62%, #1c121a);
+        linear-gradient(135deg, #1c121a, #5a2c3e 62%, #1c121a);
       transform: rotate(5deg);
+    }
+
+    .friend-eyes {
+      position: absolute;
+      left: 50%;
+      top: 32px;
+      width: 46px;
+      height: 14px;
+      transform: translateX(-50%);
+      z-index: 6;
+    }
+
+    .friend-eyes::before,
+    .friend-eyes::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, #ffffff 0 4px, #2a1a24 5px 12px, #1a0f14 13px 16px);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .friend-eyes::before {
+      left: 0;
+    }
+
+    .friend-eyes::after {
+      right: 0;
+    }
+
+    .friend-eyes .pupil {
+      display: none;
+    }
+
+    .friend-eyebrows {
+      position: absolute;
+      left: 50%;
+      top: 24px;
+      width: 50px;
+      height: 6px;
+      transform: translateX(-50%);
+      z-index: 7;
+    }
+
+    .friend-eyebrows::before,
+    .friend-eyebrows::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 18px;
+      height: 4px;
+      border-radius: 4px;
+      background: #4a2a34;
+      transform: rotate(-6deg);
+    }
+
+    .friend-eyebrows::before {
+      left: 2px;
+      transform: rotate(-8deg);
+    }
+
+    .friend-eyebrows::after {
+      right: 2px;
+      transform: rotate(8deg);
     }
 
     .friend-face {
       position: absolute;
       left: 50%;
-      top: 36px;
-      width: 34px;
-      height: 15px;
+      bottom: 22px;
+      width: 28px;
+      height: 14px;
       border-radius: 0 0 18px 18px;
-      border-bottom: 3px solid #6a3142;
+      border-bottom: 3px solid #8a4a5a;
       transform: translateX(-50%);
+      z-index: 6;
     }
 
     .friend-face::before,
     .friend-face::after {
       content: "";
       position: absolute;
-      top: -13px;
-      width: 6px;
-      height: 6px;
+      top: -8px;
+      width: 8px;
+      height: 10px;
       border-radius: 50%;
-      background: #5c3143;
+      background: #c47a8a;
     }
 
     .friend-face::before {
-      left: 4px;
+      left: 2px;
     }
 
     .friend-face::after {
-      right: 4px;
+      right: 2px;
     }
 
-    .friend-face {
-      box-shadow:
-        -22px -9px 0 -6px rgba(244, 109, 143, .32),
-        22px -9px 0 -6px rgba(244, 109, 143, .32);
+    .friend-cheeks {
+      position: absolute;
+      left: 50%;
+      top: 40px;
+      width: 56px;
+      height: 16px;
+      transform: translateX(-50%);
+      z-index: 5;
+    }
+
+    .friend-cheeks::before,
+    .friend-cheeks::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 18px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(244, 109, 143, 0.15);
+      filter: blur(2px);
+    }
+
+    .friend-cheeks::before {
+      left: 0;
+    }
+
+    .friend-cheeks::after {
+      right: 0;
     }
 
     .friend-glasses {
       position: absolute;
       left: 50%;
-      top: 28px;
-      z-index: 3;
-      width: 53px;
-      height: 21px;
-      border-top: 2px solid #2f2430;
+      top: 27px;
+      z-index: 8;
+      width: 56px;
+      height: 24px;
+      border-top: 2px solid #3a2a34;
       transform: translateX(-50%);
+      opacity: 0.5;
     }
 
     .friend-glasses::before,
     .friend-glasses::after {
       content: "";
       position: absolute;
-      top: -4px;
-      width: 22px;
-      height: 19px;
-      border: 2px solid #2f2430;
+      top: -5px;
+      width: 24px;
+      height: 21px;
+      border: 2px solid #3a2a34;
       border-radius: 42% 42% 48% 48%;
-      background: rgba(255, 255, 255, .16);
+      background: rgba(255, 255, 255, .12);
       box-shadow: 0 2px 0 rgba(47, 36, 48, .08);
     }
 
@@ -761,39 +854,40 @@
       position: absolute;
       bottom: 43px;
       z-index: 2;
-      width: 15px;
-      height: 50px;
+      width: 16px;
+      height: 48px;
       border-radius: 999px;
-      background: #fff8f2;
+      background: linear-gradient(180deg, #ffdac6, #f5c4ad);
       transform-origin: 50% 94%;
       will-change: transform;
+      box-shadow: 0 2px 6px rgba(47, 27, 52, .08);
     }
 
     .friend-arm::after {
       content: "";
       position: absolute;
       left: 50%;
-      top: -5px;
-      width: 19px;
-      height: 19px;
+      top: -4px;
+      width: 18px;
+      height: 18px;
       border-radius: 50%;
-      background: #ffd6bd;
+      background: linear-gradient(160deg, #ffdac6, #f5c4ad);
       box-shadow: inset -3px -3px 0 rgba(244, 109, 143, .12);
       transform: translateX(-50%);
     }
 
     .friend-arm.left {
       z-index: 1;
-      left: 16px;
+      left: 14px;
       transform: rotate(28deg);
     }
 
     .friend-arm.right {
       z-index: 6;
-      right: 8px;
+      right: 6px;
       bottom: 52px;
-      height: 58px;
-      transform: rotate(-84deg);
+      height: 56px;
+      transform: rotate(84deg);
     }
 
     body.surprise-show .cake-friend {
@@ -1312,23 +1406,19 @@
 
     @keyframes waveHand {
       0%, 100% {
-        transform: rotate(-88deg);
+        transform: rotate(88deg);
       }
-
       22% {
-        transform: rotate(-116deg);
+        transform: rotate(116deg);
       }
-
       44% {
-        transform: rotate(-92deg);
+        transform: rotate(92deg);
       }
-
       66% {
-        transform: rotate(-112deg);
+        transform: rotate(112deg);
       }
-
       82% {
-        transform: rotate(-96deg);
+        transform: rotate(96deg);
       }
     }
 
@@ -1569,7 +1659,13 @@
               <span class="friend-arm left"></span>
               <span class="friend-arm right"></span>
               <span class="friend-body"></span>
-              <span class="friend-head"><span class="friend-glasses"></span><span class="friend-face"></span></span>
+              <span class="friend-head">
+                <span class="friend-eyebrows"></span>
+                <span class="friend-eyes"><span class="pupil"></span><span class="pupil"></span></span>
+                <span class="friend-cheeks"></span>
+                <span class="friend-glasses"></span>
+                <span class="friend-face"></span>
+              </span>
             </div>
             <div class="cake-burst" aria-hidden="true">
               <span></span>
